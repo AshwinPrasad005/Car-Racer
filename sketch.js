@@ -9,19 +9,19 @@ var score = 0;
 var posY = -5000, posX = -500;
 
 function preload() {
-  playerImg = loadImage("images/player.jpg");
-  carImg1 = loadImage("images/car1.jpeg");
+  playerImg = loadImage("images/player.png");
+  carImg1 = loadImage("images/car1.png");
   carImg2 = loadImage("images/car2.png");
-  carImg3 = loadImage("images/car3.jpg");
-  carImg4 = loadImage("images/car4.jpeg");
-  carImg5 = loadImage("images/car5.jpeg");
-  track = loadImage("images/track.jpg");
+  carImg3 = loadImage("images/car3.png");
+  carImg4 = loadImage("images/car4.png");
+  carImg5 = loadImage("images/car5.png");
+  track = loadImage("images/track.png");
 }
 
 function setup() {
-  canvas = createCanvas(displayWidth, displayHeight - 170);
+  canvas = createCanvas(windowWidth, windowHeight);
 
-  player = createSprite(displayWidth / 2, 2300, 40, 40);
+  player = createSprite(width-600, 2300, width, 40);
   player.addImage(playerImg);
   player.scale = 0.2;
 
@@ -58,11 +58,13 @@ function draw() {
   player.collide(Iwall2);
   player.velocityY = -10;
 
-  if (keyDown(LEFT_ARROW)) {
+  if (touches.length > 0 || keyDown(LEFT_ARROW)) {
     player.x -= 10;
+    touches=[];
   }
-  if (keyDown(RIGHT_ARROW)) {
+  if (touches.length > 0 || keyDown(RIGHT_ARROW)) {
     player.x += 10;
+    touches=[]
   }
   if (player.y === -5080) {
     gameState = 2;
